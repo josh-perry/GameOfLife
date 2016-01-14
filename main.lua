@@ -118,7 +118,7 @@ function updateCells()
 			if map[y-1] and map[y-1][x+1] 	and map[y-1][x+1] 	== 3 	then iNeighbours = iNeighbours + 1 	end
 			if map[y] 	and map[y][x+1] 	and map[y][x+1] 	== 3 	then iNeighbours = iNeighbours + 1 	end
 			if map[y+1] and map[y+1][x+1] 	and map[y+1][x+1] 	== 3 	then iNeighbours = iNeighbours + 1 	end
-			
+
 			tNeighbours = neighbours + mNeighbours + iNeighbours
 
 			if map[y][x] == 1 then -- Currently alive, unmutated
@@ -126,7 +126,7 @@ function updateCells()
 					if mNeighbours > 0 then
 						bufferMap[y][x] = 2 -- Mutate
 					else
-						bufferMap[y][x] = 1 -- Survives					
+						bufferMap[y][x] = 1 -- Survives
 					end
 				else
 					bufferMap[y][x] = 0 -- Kill
@@ -141,10 +141,10 @@ function updateCells()
 				else
 					bufferMap[y][x] = 0 -- Kill
 				end
-			
+
 			elseif map[y][x] == 3 then -- Currently alive, immunised
 				if tNeighbours == 3 or tNeighbours == 2 then
-					bufferMap[y][x] = 3 -- Survives					
+					bufferMap[y][x] = 3 -- Survives
 				else
 					bufferMap[y][x] = 0 -- Kill
 				end
@@ -198,13 +198,13 @@ function love.update(dt)
 	mouseX, mouseY = love.mouse.getPosition()
 	selCellX = math.ceil(mouseX / cellSize)
 	selCellY = math.ceil(mouseY / cellSize)
-	if love.mouse.isDown("r") then
+	if love.mouse.isDown(2) then
 		map[selCellY][selCellX] = 0
 		bufferMap[selCellY][selCellX] = 0
-	elseif love.mouse.isDown("l") then
+	elseif love.mouse.isDown(1) then
 		map[selCellY][selCellX] = 1
 		bufferMap[selCellY][selCellX] = 1
-	elseif love.mouse.isDown("m") then
+	elseif love.mouse.isDown(3) then
 		map[selCellY][selCellX] = 2
 		bufferMap[selCellY][selCellX] = 2
 	end
